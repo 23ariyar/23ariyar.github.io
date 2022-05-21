@@ -5,15 +5,15 @@ import os
 
 
 class TweetScraper(object):
-    def __init__(self, query_words: list):
+    def __init__(self, query_words):
         """
         Initializes this TweetScraper object
-        query_words: list of words for this TweetScraper object to query twitter for
+        :param query_words: list of words for this TweetScraper object to query twitter for
         """
         self.query_words = query_words
         self.client = TwitterClient()
 
-        # path for which to create insert daily tweet data
+        # path for which to insert daily tweet data
         self.tweet_dir_path = "/Users/ariyaredddyy/Documents/Projects/sentiment-analysis/tweets"
         self.today_date = str(date.today())
 
@@ -37,9 +37,9 @@ class TweetScraper(object):
         Creates a SQLite database in tweet_dir_path/today_date/query_word for this word
         and includes data about sentiment, data, tweet id, username, and the tweet's content
 
-        query_word: Word to query for
-        count: Number of tweets to query for
-        to_filter: determines whether to filter tweets depending. Filtering depends
+        :param query_word: Word to query for
+        :param count: Number of tweets to query for
+        :param to_filter: determines whether to filter tweets depending. Filtering depends
                    self.filter_tweets
         """
         path = os.path.join(self.tweet_dir_path, self.today_date, query_word + ".db")  # creates db path
@@ -62,9 +62,9 @@ class TweetScraper(object):
         beats Ukraine" will be filtered out of the resultant list
         while "Russia wins!" or "Ukraine wins"! will be kept in.
 
-        fetched_tweets: unparsed tweets for which to filter
+        :param fetched_tweets: unparsed tweets for which to filter
 
-        return: filtered list of tweets
+        :return filtered list of tweets
         """
         filtered_tweets = []
 

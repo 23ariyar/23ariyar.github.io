@@ -34,21 +34,29 @@ class TwitterClient(object):
             print("Error: Authentication Failed")
 
     @staticmethod
-    def clean_tweet(tweet):
+    def clean_tweet(tweet_text: str):
         '''
         Utility function to clean tweet text by removing links, special characters
         using simple regex statements.
+
+        :param  tweet_text: text of tweet to clean
         '''
-        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])", " ", tweet).split()).lower()
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])", " ", tweet_text).split()).lower()
 
     @staticmethod
-    def get_tweet_sentiment(tweet):
+    def get_tweet_sentiment(tweet_text: str):
         '''
         Utility function to classify sentiment of passed tweet
         using textblob's sentiment method
+
+        :param tweet_text: text of tweet from which to determine sentiment
+
+        :return "+" if the sentiment of the text is positive,
+                "-" if the sentiment of the text is negative,
+                "±" if the sentiment of the text is neutral
         '''
         # create TextBlob object of passed tweet text
-        analysis = TextBlob(TwitterClient.clean_tweet(tweet))
+        analysis = TextBlob(TwitterClient.clean_tweet(tweet_text))
         # set sentiment
         if analysis.sentiment.polarity > 0:
             return '+'
@@ -60,72 +68,18 @@ class TwitterClient(object):
     def fetch_tweets(self, query, count=10):
         '''
         fetches unparsed tweets
+
+        :param query: word for which to query for
+        :param count: number of tweets to fetch, defaults to 10
+
+        :return fetched tweets
         '''
         fetched_tweets = self.api.search_tweets(q=query, count=count)
         return fetched_tweets
 
-    def get_tweets(self, query, count=10):
-        '''
-        Main function to get tweets and parse them.
-        '''
-        # empty list to store parsed tweets
-        tweets = []
-
-        try:
-            # call twitter api to fetch tweets
-            fetched_tweets = self.fetch_tweets(query, count)
-
-            # parsing tweets one by one
-            for tweet in fetched_tweets:
-                # empty dictionary to store required params of a tweet
-                parsed_tweet = {'text': tweet.text, 'sentiment': self.get_tweet_sentiment(tweet.text)}
-
-                # appending parsed tweet to tweets list
-                if tweet.retweet_count > 0:
-                    # if tweet has retweets, ensure that it is appended only once
-                    if parsed_tweet not in tweets:
-                        tweets.append(parsed_tweet)
-                else:
-                    tweets.append(parsed_tweet)
-
-            # return parsed tweets
-            return tweets
-
-        except errors.TweepyException as e:
-            # print error (if any)
-            print("Error : " + str(e))
-
-
-def main():
-    # creating object of TwitterClient Class
-    api = TwitterClient()
-    # calling function to get tweets
-    tweets = api.get_tweets(query='Russia', count=200)
-
-    # picking positive tweets from tweets
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == '+']
-    # percentage of positive tweets
-    print("Positive tweets percentage: {} %".format(100 * len(ptweets) / len(tweets)))
-    # picking negative tweets from tweets
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == '-']
-    # percentage of negative tweets
-    print("Negative tweets percentage: {} %".format(100 * len(ntweets) / len(tweets)))
-    # percentage of neutral tweets
-    print("Neutral tweets percentage: {} % \
-        ".format(100 * (len(tweets) - (len(ntweets) + len(ptweets))) / len(tweets)))
-
-    # printing first 5 positive tweets
-    print("\n\nPositive tweets:")
-    for tweet in ptweets[:10]:
-        print(tweet['text'])
-
-    # printing first 5 negative tweets
-    print("\n\nNegative tweets:")
-    for tweet in ntweets[:10]:
-        print(tweet['text'])
 
 
 if __name__ == "__main__":
     # calling main function
     os.system('cls' if os.name == 'nt' else 'clear')
-    main()
+    print("TwitterClient has compiled without issues")

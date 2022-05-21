@@ -13,7 +13,7 @@ class TweetDB(object):
         """
         Initializes a TweetDB object.
 
-        filename: filename for which to create a database path.
+        :param filename: filename for which to create a database path.
                   can be absolute path or relative path
         """
         self.filename = filename
