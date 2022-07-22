@@ -5,6 +5,8 @@ from textblob import TextBlob
 import os
 
 
+
+
 # Code adapted from https://www.geeksforgeeks.org/twitter-sentiment-analysis-using-python/
 
 class TwitterClient(object):

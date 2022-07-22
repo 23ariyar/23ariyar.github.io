@@ -31,6 +31,7 @@ def compile_data(file_name: str):
         {"day": "5-20-2020", "positive": 1, "negative": 1, "neutral": 98}
     ]
     """
+
     file_name = file_name
     data = []
 
