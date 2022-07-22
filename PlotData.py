@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from TweetDatabase import get_database_data
 import os
 import glob
+import sys
 
 tweet_dir_path = "/Users/ariyaredddyy/Documents/Projects/sentiment-analysis/tweets"
 
@@ -61,6 +62,7 @@ def plot_russia_ukraine_over_time(sentiment_to_plot_for="positive"):
     if sentiment_to_plot_for not in ["positive", "negative", "neutral"]:
         raise TypeError('Only "positive", "negative", and "neutral" are valid arguments for '
                         'plot_russia_ukraine_over_time')
+
     ukraine_data = compile_data("ukraine.db")
     russia_data = compile_data("russia.db")
 
@@ -86,4 +88,7 @@ def plot_russia_ukraine_over_time(sentiment_to_plot_for="positive"):
 
 
 if __name__ == "__main__":
-    plot_russia_ukraine_over_time()
+    if len(sys.argv) != 1:
+        plot_russia_ukraine_over_time(sys.argv[1])
+    else:
+        plot_russia_ukraine_over_time()

@@ -83,7 +83,7 @@ class TweetScraper(object):
         Each database will be stored under a directory in self.tweet_dir_path.
         The directory will be named  based on the day of which the program is being run.
         """
-        self.create_dir()  # creates a directory based on the name
+        self.create_dir()  # creates a directory based on the date
         for word in self.query_words:  # queries each query word
             self.query(word)
             print("Finished Querying: " + word)

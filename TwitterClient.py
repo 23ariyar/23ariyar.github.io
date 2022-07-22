@@ -1,6 +1,5 @@
 import re
 import tweepy
-from tweepy import errors
 from tweepy import OAuthHandler
 from textblob import TextBlob
 import os
@@ -78,8 +77,7 @@ class TwitterClient(object):
         return fetched_tweets
 
 
-
 if __name__ == "__main__":
     # calling main function
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')  # clears terminal screan
     print("TwitterClient has compiled without issues")
