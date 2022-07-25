@@ -5,8 +5,6 @@ from textblob import TextBlob
 import os
 
 
-
-
 # Code adapted from https://www.geeksforgeeks.org/twitter-sentiment-analysis-using-python/
 
 class TwitterClient(object):
@@ -19,10 +17,16 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = 'UCrAuYZ28x2QFcaY26vOJDXCe'
-        consumer_secret = 'QkTIKbiVRCyvMr4dO1kBIh6DOi6nzliILpiGOYA1MdNb9fdHO8'
-        access_token = '1363225477100412930-nfVQm5qeJvq6DpyhaEJUqosO3hStym'
-        access_token_secret = 'PXHrX4RPs0w1NbRf6XBA5ZWNvVkVM4cKhMXHjrIONoOux'
+
+        keys_file = open("/Users/ariyaredddyy/Documents/Projects/sentiment-analysis/APIKeys.txt", "r")
+
+
+        #Reads API keys from a separate file
+        consumer_key = keys_file.readline().rstrip()
+        consumer_secret = keys_file.readline().rstrip()
+        access_token = keys_file.readline().rstrip()
+        access_token_secret = keys_file.readline().rstrip()
+
         # attempt authentication
         try:
             # create OAuthHandler object

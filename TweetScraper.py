@@ -31,7 +31,7 @@ class TweetScraper(object):
             print("Directory with date already exists.")
             print("Using existing directory (" + self.tweet_dir_path + "/" + self.today_date + ")")
 
-    def query(self, query_word: str, count: int = 5000, to_filter: bool = False):
+    def query(self, query_word: str, count: int = 10000, to_filter: bool = False):
         """
         Queries for a specific word on twitter for "count" amount of tweets.
         Creates a SQLite database in tweet_dir_path/today_date/query_word for this word
