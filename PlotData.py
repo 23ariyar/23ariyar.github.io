@@ -87,6 +87,8 @@ def plot_russia_ukraine_over_time(sentiment_to_plot_for="positive"):
     plt.legend()  # turns on plot legend
     plt.show()  # shows plot
 
+def brython_tester():
+    return "Hello World"
 
 if __name__ == "__main__":
     if len(sys.argv) != 1:

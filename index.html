@@ -12,13 +12,13 @@
 <body onload="brython()">
     <input type="text" id="text" placeholder="Enter anything in mind">
     <span id="output"></span>
-        <script type="text/python" id="script1">
+        <script type="text/python">
             from browser import document
+            from PlotData import brython_tester
 
-            def show_text(e):
-                document['output'].textContent = e.target.value;
+            document <= brython_tester()
 
-            document['text'].bind('input', show_text)
+
         </script>
 </body>
 </html>
