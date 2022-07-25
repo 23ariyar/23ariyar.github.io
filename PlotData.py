@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt, mpld3
 from TweetDatabase import get_database_data
 import os
 import glob
@@ -85,7 +85,8 @@ def plot_russia_ukraine_over_time(sentiment_to_plot_for="positive"):
     plt.xlabel("Date")
     plt.ylabel("Percentage of " + sentiment_to_plot_for.capitalize()  + " Sentiment Tweets")
     plt.legend()  # turns on plot legend
-    plt.show()  # shows plot
+
+    mpld3.show()  # shows plot
 
 def brython_tester():
     return "Hello World"
